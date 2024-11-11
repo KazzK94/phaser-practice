@@ -1,0 +1,16 @@
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #3d3d3d;
+	color: white;
+	
+	height: 100vh;
+	display: grid;
+	place-items: center;
+}
