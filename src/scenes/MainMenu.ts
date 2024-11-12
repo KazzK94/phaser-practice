@@ -1,14 +1,11 @@
 
 import { Scene } from 'phaser'
+import { SCENE_KEYS } from '../utils/sceneKeys'
 
-export class MainMenu extends Scene {
+export class MainMenuScene extends Scene {
 	constructor() {
-		super('MainMenu')
+		super(SCENE_KEYS.MAIN_MENU)
 	}
-
-	preload() {
-		this.load.setPath('assets')
- 	}
 
 	create() {
 		this.add.text(400, 230, 'Deckira I', {

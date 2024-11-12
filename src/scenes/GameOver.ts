@@ -1,9 +1,10 @@
 
 import { Scene } from 'phaser'
+import { SCENE_KEYS } from '../utils/sceneKeys'
 
 export class GameOverScene extends Scene {
 	constructor() {
-		super('GameOver')
+		super(SCENE_KEYS.GAME_OVER)
 	}
 
 	create() {
@@ -12,7 +13,7 @@ export class GameOverScene extends Scene {
 		gameOverText.setOrigin(0.5)
 		this.tweens.add({
 			targets: gameOverText,
-			y: 300,
+			y: 280,
 			duration: 2000,
 			ease: 'Sine.easeInOut',
 			yoyo: true,

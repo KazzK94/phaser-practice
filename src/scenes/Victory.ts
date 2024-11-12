@@ -1,9 +1,10 @@
 
 import { Scene } from 'phaser'
+import { SCENE_KEYS } from '../utils/sceneKeys'
 
 export class VictoryScene extends Scene {
 	constructor() {
-		super('Victory')
+		super(SCENE_KEYS.VICTORY)
 	}
 
 	create() {

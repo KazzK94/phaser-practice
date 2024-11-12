@@ -1,8 +1,9 @@
 
 import Phaser, { Types } from 'phaser'
-import { MainMenu } from './scenes/MainMenu'
-import { GameScene } from './scenes/Game'
 
+// Scenes
+import { MainMenuScene } from './scenes/MainMenu'
+import { GameScene } from './scenes/Game'
 import { GameOverScene } from './scenes/GameOver'
 import { VictoryScene } from './scenes/Victory'
 
@@ -19,10 +20,10 @@ const config: Types.Core.GameConfig = {
 		}
 	},
 	scene: [
-		MainMenu,
+		MainMenuScene,
 		GameScene,
-		GameOverScene,
-		VictoryScene
+		VictoryScene,
+		GameOverScene
 	]
 }
 
