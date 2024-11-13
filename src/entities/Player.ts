@@ -4,6 +4,7 @@ import { Character } from './Character'
 import { createPlayerAnimations, handlePlayerActions, handlePlayerMovement, setupInputs } from '../logic/player'
 import { PlayerHealthBar } from '../ui/PlayerHealthBar'
 import { SCENE_KEYS } from '../utils/sceneKeys'
+import { initGamepad } from '../logic/gamepad'
 
 /** 
  * A class representing the player. The Player class holds the sprite that the player controls.
@@ -13,6 +14,8 @@ export class Player extends Character {
 	// Input keys
 	wasdKeys!: { [key: string]: Phaser.Input.Keyboard.Key }
 	cursors!: Phaser.Types.Input.Keyboard.CursorKeys
+	pad!: Phaser.Input.Gamepad.Gamepad | null | undefined
+	
 	// Events
 	events: { [key: string]: Function } = {}
 
@@ -26,6 +29,7 @@ export class Player extends Character {
 		this.setScale(2)
 		setupInputs(this)
 		createPlayerAnimations(this)
+		this.pad = initGamepad(this.scene)
 		this.healthBar = new PlayerHealthBar(this.scene, 10, 10, this.health)
 	}
 

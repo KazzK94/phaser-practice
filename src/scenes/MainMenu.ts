@@ -37,10 +37,9 @@ export class MainMenuScene extends Scene {
 
 	setupGamepad() {
 		initGamepad(this, (pad) => {
+			this.pad = pad
 			this.textPressToContinue.setText('Press any button in your controller to continue')
-			pad.on('down', (_index: number, _value: number) => {
-				this.startGame()
-			})
+			pad.once('down', this.startGame, this)
 		})
 	}
 

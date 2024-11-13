@@ -2,10 +2,13 @@
 import { Player } from '../entities/Player'
 
 export function handlePlayerMovement(player: Player) {
-	const left = player.cursors.left.isDown || player.wasdKeys.A.isDown
-	const right = player.cursors.right.isDown || player.wasdKeys.D.isDown
-	const up = player.cursors.up.isDown || player.wasdKeys.W.isDown
-	const down = player.cursors.down.isDown || player.wasdKeys.S.isDown
+
+	const gamepad = player.pad || false // In case the gamepad is not initialized, set all checks to false
+
+	const right = player.cursors.right.isDown || player.wasdKeys.D.isDown || (gamepad && gamepad.right)
+	const left = player.cursors.left.isDown || player.wasdKeys.A.isDown || (gamepad && gamepad.left)
+	const down = player.cursors.down.isDown || player.wasdKeys.S.isDown || (gamepad && gamepad.down)
+	const up = player.cursors.up.isDown || player.wasdKeys.W.isDown || (gamepad && gamepad.up)
 
 	const baseSpeed = 200
 	const velocity = {
@@ -29,7 +32,11 @@ export function handlePlayerMovement(player: Player) {
 }
 
 export function handlePlayerActions(player: Player) {
-	if (Phaser.Input.Keyboard.JustDown(player.cursors.space)) {
+	const gamepad = player.pad || false // In case the gamepad is not initialized, set all checks to false
+
+	const spacePressed = Phaser.Input.Keyboard.JustDown(player.cursors.space)
+	const gamepadActionButtonPressed = gamepad && gamepad.A
+	if (spacePressed || gamepadActionButtonPressed) {
 		if (player.events['fire']) {
 			player.events['fire']()
 		}
