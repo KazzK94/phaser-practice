@@ -1,10 +1,17 @@
 
 import { Scene } from 'phaser'
 import { SCENE_KEYS } from '../utils/sceneKeys'
+import { initGamepad } from '../logic/gamepad'
 
 export class MainMenuScene extends Scene {
+
+	pad!: Phaser.Input.Gamepad.Gamepad | null
+
+	private textPressToContinue!: Phaser.GameObjects.Text
+
 	constructor() {
 		super(SCENE_KEYS.MAIN_MENU)
+		this.pad = null
 	}
 
 	create() {
@@ -14,28 +21,30 @@ export class MainMenuScene extends Scene {
 			color: '#fbb',
 			fontFamily: 'monospace'
 		}).setOrigin(0.5)
-		this.add.text(400, 320, 'Press SPACE to continue', {
+		this.textPressToContinue = this.add.text(400, 320, 'Press SPACE to continue', {
 			fontSize: '24px',
 			color: '#fff',
 			fontFamily: 'Arial'
 		}).setOrigin(0.5)
 
-		this.input.keyboard?.once('keydown-SPACE', () => {
-			this.scene.start('Game')
-		})
-
+		this.setupKeyboard()
 		this.setupGamepad()
 	}
 
+	setupKeyboard() {
+		this.input.keyboard?.once('keydown-SPACE', this.startGame)
+	}
+
 	setupGamepad() {
-		const gamepad = this.input.gamepad?.getPad(0)
-		console.log('\n')
-		console.log({ gamepad }) // This is undefined, even with the controller connected
-		console.log('\n')
-		/*
-		this.input.gamepad.on('connected', function (gamepad, event) {
-			console.log({ gamepad, event })
+		initGamepad(this, (pad) => {
+			this.textPressToContinue.setText('Press any button in your controller to continue')
+			pad.on('down', (_index: number, _value: number) => {
+				this.startGame()
+			})
 		})
-		*/
+	}
+
+	startGame() {
+		this.scene.start('Game')
 	}
 }
