@@ -5,13 +5,10 @@ import { initGamepad } from '../logic/gamepad'
 
 export class MainMenuScene extends Scene {
 
-	pad!: Phaser.Input.Gamepad.Gamepad | null
-
 	private textPressToContinue!: Phaser.GameObjects.Text
 
 	constructor() {
 		super(SCENE_KEYS.MAIN_MENU)
-		this.pad = null
 	}
 
 	create() {
@@ -37,7 +34,6 @@ export class MainMenuScene extends Scene {
 
 	setupGamepad() {
 		initGamepad(this, (pad) => {
-			this.pad = pad
 			this.textPressToContinue.setText('Press any button in your controller to continue')
 			this.time.delayedCall(500, () => {
 				pad.once('down', this.startGame, this)
