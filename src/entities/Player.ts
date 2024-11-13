@@ -3,6 +3,7 @@ import { Character } from './Character'
 
 import { createPlayerAnimations, handlePlayerActions, handlePlayerMovement, setupInputs } from '../logic/player'
 import { PlayerHealthBar } from '../ui/PlayerHealthBar'
+import { SCENE_KEYS } from '../utils/sceneKeys'
 
 /** 
  * A class representing the player. The Player class holds the sprite that the player controls.
@@ -33,6 +34,12 @@ export class Player extends Character {
 		handlePlayerMovement(this)
 		// Handle all events (stored in this.events)
 		handlePlayerActions(this)
+
+		// Check if dead
+		if (this.health <= 0) {
+			this.scene.scene.start(SCENE_KEYS.GAME_OVER)
+		}
+
 	}
 
 	/** Adds a listener to the specified trigger, to run the specified callback */

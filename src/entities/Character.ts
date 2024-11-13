@@ -9,6 +9,7 @@ export class Character extends Phaser.Physics.Arcade.Sprite {
 	protected health: number = 100
 	// Character's UI
 	protected healthBar?: PlayerHealthBar | EnemyHealthBar
+	private invulnerable = false
 
 	constructor(scene: Phaser.Scene, x: number, y: number, texture: string) {
 		super(scene, x, y, texture)
@@ -18,13 +19,28 @@ export class Character extends Phaser.Physics.Arcade.Sprite {
 
 	/** Deals damage to the character. Returns true if character died or false if character survived. */
 	takeDamage(amount: number) {
+		if (this.invulnerable) return false
+
 		this.health -= amount
-		if(this.healthBar) {
+		if (this.healthBar) {
 			this.healthBar.update(this.health)
 		}
 		if (this.health <= 0) {
 			return true
 		}
+
+		this.setTint(0xff6666)
+		this.invulnerable = true
+		this.scene.time.delayedCall(100, () => {
+			this.clearTint()
+		})
+		this.scene.time.delayedCall(200, () => {
+			this.setTint(0xff6666)
+		})
+		this.scene.time.delayedCall(300, () => {
+			this.clearTint()
+			this.invulnerable = false
+		})
 		return false
 	}
 

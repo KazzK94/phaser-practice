@@ -26,7 +26,7 @@ export class EnemyHealthBar extends Phaser.GameObjects.GameObject {
 		this.bar.fillRect(this.x, this.y, this.width, this.height)
 
 		// Draw health
-		const healthWidth = Math.floor(this.width * (healthPercent / 100))
+		const healthWidth = Math.max(Math.floor(this.width * (healthPercent / 100)), 0)
 		this.bar.fillStyle(0xdd0000, 1)
 		this.bar.fillRect(this.x, this.y, healthWidth, this.height)
 

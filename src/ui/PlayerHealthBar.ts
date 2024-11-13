@@ -26,7 +26,7 @@ export class PlayerHealthBar extends Phaser.GameObjects.GameObject {
 		this.bar.fillRect(this.x, this.y, this.width, this.height)
 
 		// Draw health
-		const healthWidth = Math.floor(this.width * (healthPercent / 100))
+		const healthWidth = Math.max(Math.floor(this.width * (healthPercent / 100)), 0)
 		if (healthPercent > 60) {
 			this.bar.fillStyle(0x00ff00, 1)
 		} else if (healthPercent > 30) {
