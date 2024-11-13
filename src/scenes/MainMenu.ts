@@ -23,5 +23,17 @@ export class MainMenuScene extends Scene {
 		this.input.keyboard?.once('keydown-SPACE', () => {
 			this.scene.start('Game')
 		})
+
+		this.setupGamepad()
+	}
+
+	setupGamepad() {
+		const gamepad = this.input.gamepad?.getPad(0)
+		console.log(gamepad) // This is undefined, even with the controller connected
+		/*
+		this.input.gamepad.on('connected', function (gamepad, event) {
+			console.log({ gamepad, event })
+		})
+		*/
 	}
 }

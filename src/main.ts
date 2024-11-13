@@ -19,6 +19,9 @@ const config: Types.Core.GameConfig = {
 			debug: false
 		}
 	},
+	input: {
+		gamepad: true
+	},
 	scale: {
 		mode: Phaser.Scale.ScaleModes.FIT,
 		autoCenter: Phaser.Scale.Center.CENTER_BOTH,
@@ -32,4 +35,4 @@ const config: Types.Core.GameConfig = {
 	]
 }
 
-export default new Phaser.Game(config)
+new Phaser.Game(config)
