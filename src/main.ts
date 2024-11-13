@@ -16,8 +16,13 @@ const config: Types.Core.GameConfig = {
 	physics: {
 		default: 'arcade',
 		arcade: {
-			debug: true
+			debug: false
 		}
+	},
+	scale: {
+		mode: Phaser.Scale.ScaleModes.FIT,
+		autoCenter: Phaser.Scale.Center.CENTER_BOTH,
+		zoom: 2
 	},
 	scene: [
 		MainMenuScene,

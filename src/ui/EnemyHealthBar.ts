@@ -1,5 +1,5 @@
 
-export class PlayerHealthBar extends Phaser.GameObjects.GameObject {
+export class EnemyHealthBar extends Phaser.GameObjects.GameObject {
 	private bar: Phaser.GameObjects.Graphics
 	private x: number
 	private y: number
@@ -7,7 +7,7 @@ export class PlayerHealthBar extends Phaser.GameObjects.GameObject {
 	private height: number = 20
 
 	constructor(scene: Phaser.Scene, x: number, y: number, healthPercent = 100) {
-		super(scene, 'PlayerHealthBar')
+		super(scene, 'EnemyHealthBar')
 		this.bar = scene.add.graphics()
 		this.x = x
 		this.y = y
@@ -27,17 +27,15 @@ export class PlayerHealthBar extends Phaser.GameObjects.GameObject {
 
 		// Draw health
 		const healthWidth = Math.floor(this.width * (healthPercent / 100))
-		if (healthPercent > 60) {
-			this.bar.fillStyle(0x00ff00, 1)
-		} else if (healthPercent > 30) {
-			this.bar.fillStyle(0xffff00, 1)
-		} else {
-			this.bar.fillStyle(0xff0000, 1)
-		}
+		this.bar.fillStyle(0xdd0000, 1)
 		this.bar.fillRect(this.x, this.y, healthWidth, this.height)
 
 		// Draw border
 		this.bar.lineStyle(2, 0x222222)
 		this.bar.strokeRect(this.x, this.y, this.width, this.height)
+	}
+
+	destroy(): void {
+		this.bar.destroy()
 	}
 }

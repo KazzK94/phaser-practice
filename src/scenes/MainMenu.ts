@@ -11,7 +11,7 @@ export class MainMenuScene extends Scene {
 		this.add.text(400, 230, 'Deckira I', {
 			fontSize: '76px',
 			fontStyle: 'bold',
-			color: '#d55',
+			color: '#fbb',
 			fontFamily: 'monospace'
 		}).setOrigin(0.5)
 		this.add.text(400, 320, 'Press SPACE to continue', {

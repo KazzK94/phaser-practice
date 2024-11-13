@@ -1,57 +1,63 @@
 
-export class Enemy {
-	// Enemy's Data
-	character!: Phaser.Physics.Arcade.Sprite
-	// private health: number = 100
+import { Character } from './Character'
+import { EnemyHealthBar } from '../ui/EnemyHealthBar'
+
+export class Enemy extends Character {
+	// Events
+	events: { [key: string]: Function } = {}
 
 	constructor(scene: Phaser.Scene, x: number, y: number) {
-		this.character = scene.physics.add.sprite(x, y, 'dragon')
-		this.character.setOrigin(0.5)
-		this.character.setImmovable(true)
-
-		this.setupIdleAnimation(scene)
-		this.setupProjectilesLoop(scene)
+		super(scene, x, y, 'dragon')
+		scene.add.existing(this)
+		scene.physics.add.existing(this)
+		this.create()
 	}
 
-	setupIdleAnimation(scene: Phaser.Scene) {
-		const baseVelo = 50
+	create() {
+		this.setOrigin(0.5)
+		this.setImmovable(true)
+		this.setupIdleAnimation()
+		this.healthBar = new EnemyHealthBar(this.scene, this.scene.cameras.main.width -210, 10)
+		this.setupThrowBombs()
+	}
+
+	update() {
+		if(this.health <= 0){
+			this.healthBar?.destroy()
+			this.destroy()
+		}
+	}
+
+	setupIdleAnimation() {
+		const baseVelocity = 50
 		let direction = 1
-		this.character.setVelocityY(baseVelo * direction)
-		scene.time.addEvent({
+		this.setVelocityY(baseVelocity * direction)
+		this.scene.time.addEvent({
 			delay: 1000,
 			callback: () => {
+				if(!this.active) return
 				direction *= -1
-				this.character.setVelocityY(baseVelo * direction)
+				this.setVelocityY(baseVelocity * direction)
 			},
 			startAt: 0,
 			loop: true
 		})
 	}
 
-	setupProjectilesLoop(scene: Phaser.Scene) {
-
-		// make the enemy projectiles
-		scene.time.addEvent({
+	setupThrowBombs() {
+		this.scene.time.addEvent({
 			delay: 600,
 			callback: () => {
-				const verticalVariation = Phaser.Math.Between(-80, 80)
-				// TODO: Handle with a Projectiles Pool
-				const projectile = scene.physics.add.sprite(this.character.x - 40, this.character.y + verticalVariation, 'bomb')
-				projectile.setScale(3)
-				projectile.setVelocityX(-300)
-				/*
-				scene.physics.add.collider(scene.player, projectile, () => {
-					projectile.destroy()
-					scene.takeDamage(10)
-				})
-				*/
-				// When out of bounds destroy
-				if (projectile.x < 0) {
-					projectile.destroy()
+				if(this.events['fire']){
+					this.events['fire'](this.x, this.y, 'left')
 				}
 			},
+			startAt: 0,
 			loop: true
 		})
 	}
 
+	onTrigger(key: string, callback: Function) {
+		this.events[key] = callback
+	}
 }
