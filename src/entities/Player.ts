@@ -15,6 +15,7 @@ export class Player extends Character {
 	wasdKeys!: { [key: string]: Phaser.Input.Keyboard.Key }
 	cursors!: Phaser.Types.Input.Keyboard.CursorKeys
 	pad!: Phaser.Input.Gamepad.Gamepad | null | undefined
+	lastPadStates: { [key: string]: boolean } = {}
 	
 	// Events
 	events: { [key: string]: Function } = {}
@@ -29,7 +30,9 @@ export class Player extends Character {
 		this.setScale(2)
 		setupInputs(this)
 		createPlayerAnimations(this)
-		this.pad = initGamepad(this.scene)
+		initGamepad(this.scene, (pad) => {
+			this.pad = pad
+		})
 		this.healthBar = new PlayerHealthBar(this.scene, 10, 10, this.health)
 	}
 

@@ -35,12 +35,14 @@ export function handlePlayerActions(player: Player) {
 	const gamepad = player.pad || false // In case the gamepad is not initialized, set all checks to false
 
 	const spacePressed = Phaser.Input.Keyboard.JustDown(player.cursors.space)
-	const gamepadActionButtonPressed = gamepad && gamepad.A
-	if (spacePressed || gamepadActionButtonPressed) {
+	const gamepadActionButtonPressed = (gamepad && gamepad.A)
+
+	if (spacePressed || (gamepadActionButtonPressed && !player.lastPadStates['A'])) {
 		if (player.events['fire']) {
 			player.events['fire']()
 		}
 	}
+	player.lastPadStates['A'] = gamepadActionButtonPressed
 }
 
 export function setupInputs(player: Player) {
