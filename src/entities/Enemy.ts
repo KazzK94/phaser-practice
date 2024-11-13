@@ -1,6 +1,7 @@
 
 import { Character } from './Character'
 import { EnemyHealthBar } from '../ui/EnemyHealthBar'
+import { SCENE_KEYS } from '../utils/sceneKeys'
 
 export class Enemy extends Character {
 	// Events
@@ -23,8 +24,9 @@ export class Enemy extends Character {
 
 	update() {
 		if(this.health <= 0){
-			this.healthBar?.destroy()
-			this.destroy()
+			// this.healthBar?.destroy()
+			// this.destroy()
+			this.scene.scene.start(SCENE_KEYS.VICTORY)
 		}
 	}
 
