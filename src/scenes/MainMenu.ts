@@ -32,7 +32,7 @@ export class MainMenuScene extends Scene {
 	}
 
 	setupKeyboard() {
-		this.input.keyboard?.once('keydown-SPACE', this.startGame)
+		this.input.keyboard?.once('keydown-SPACE', this.startGame, this)
 	}
 
 	setupGamepad() {
