@@ -1,8 +1,7 @@
 
-import { Scene } from 'phaser'
 import { SCENE_KEYS } from '../utils/sceneKeys'
 
-export class GameOverScene extends Scene {
+export class GameOverScene extends Phaser.Scene {
 	constructor() {
 		super(SCENE_KEYS.GAME_OVER)
 	}

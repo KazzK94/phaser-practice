@@ -1,6 +1,5 @@
 
 // Setup
-import { Scene } from 'phaser'
 import { SCENE_KEYS } from '../utils/sceneKeys'
 // Entities
 import { Player } from '../entities/Player'
@@ -10,7 +9,7 @@ import { Character } from '../entities/Character'
 // Logic
 import { handleProjectileVsCharacterCollision } from '../logic/projectileCollisions'
 
-export class GameScene extends Scene {
+export class GameScene extends Phaser.Scene {
 	private player!: Player
 	private enemy!: Enemy
 	private playerProjectiles!: Phaser.Physics.Arcade.Group
@@ -22,7 +21,7 @@ export class GameScene extends Scene {
 
 	preload() {
 		this.load.setPath('assets')
-		this.load.image('star', 'star.png')
+		this.load.image('bullet', 'starry-particle.png')
 		this.load.image('bomb', 'bomb.png')
 		this.load.image('dragon', 'dragon.webp')
 		this.load.spritesheet('player', 'dude.png',

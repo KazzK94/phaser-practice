@@ -31,13 +31,15 @@ export class Character extends Phaser.Physics.Arcade.Sprite {
 
 		this.setTint(0xff6666)
 		this.invulnerable = true
-		this.scene.time.delayedCall(100, () => {
+		const invulnerabilityDuration = 180
+		const invulnerabilityBlinkRate = invulnerabilityDuration / 3
+		this.scene.time.delayedCall(invulnerabilityBlinkRate, () => {
 			this.clearTint()
 		})
-		this.scene.time.delayedCall(200, () => {
+		this.scene.time.delayedCall(invulnerabilityBlinkRate*2, () => {
 			this.setTint(0xff6666)
 		})
-		this.scene.time.delayedCall(300, () => {
+		this.scene.time.delayedCall(invulnerabilityBlinkRate*3, () => {
 			this.clearTint()
 			this.invulnerable = false
 		})

@@ -4,4 +4,5 @@ export const SCENE_KEYS = Object.freeze({
 	GAME: 'Game',
 	VICTORY: 'Victory',
 	GAME_OVER: 'GameOver',
+	OPTIONS: 'Options',
 })

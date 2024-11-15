@@ -4,8 +4,9 @@ import Phaser, { Types } from 'phaser'
 // Scenes
 import { MainMenuScene } from './scenes/MainMenu'
 import { GameScene } from './scenes/Game'
-import { GameOverScene } from './scenes/GameOver'
 import { VictoryScene } from './scenes/Victory'
+import { GameOverScene } from './scenes/GameOver'
+import { OptionsScene } from './scenes/Options'
 
 const config: Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -31,7 +32,8 @@ const config: Types.Core.GameConfig = {
 		MainMenuScene,
 		GameScene,
 		VictoryScene,
-		GameOverScene
+		GameOverScene,
+		OptionsScene
 	]
 }
 
