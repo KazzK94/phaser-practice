@@ -4,7 +4,7 @@ export class Projectile extends Phaser.Physics.Arcade.Sprite {
 	potency: number
 
 	constructor(scene: Phaser.Scene, { potency, sprite, scale }: { potency: number, sprite?: string, scale?: number }) {
-		super(scene, -200, -200, sprite || 'star')
+		super(scene, -200, -200, sprite || 'bullet')
 		scene.add.existing(this)
 		scene.physics.add.existing(this)
 		this.potency = potency
